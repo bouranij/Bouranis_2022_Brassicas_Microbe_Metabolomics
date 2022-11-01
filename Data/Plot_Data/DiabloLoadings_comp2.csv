@@ -1,0 +1,16 @@
+name,comp2,GroupContrib,block,Kingdom,Phylum,Class,Order,Family,Genus
+ASV487,-0.7059600965955773,brus,micro,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Lachnospira
+ASV427,0.3696229572396233,combo,micro,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Dorea
+ASV914,-0.3473171087506591,brus,micro,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Butyricicoccus
+ASV145,-0.3281045274612782,brus,micro,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Faecalibacterium
+ASV354,0.23688855232232175,tie,micro,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,f_Lachnospiraceae_ASV354
+ASV286,-0.18667584725973205,brus,micro,Bacteria,Firmicutes,Erysipelotrichia,Erysipelotrichales,Erysipelotrichaceae,Turicibacter
+ASV68,0.16150122010919135,no_veg,micro,Bacteria,Firmicutes,Bacilli,Lactobacillales,Enterococcaceae,f_Enterococcaceae_ASV68
+ASV398,0.07902038780933043,tie,micro,Bacteria,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,f_Lachnospiraceae_ASV398
+ASV1584,0.074746530521875,combo,micro,Bacteria,Actinobacteria,Coriobacteriia,Coriobacteriales,Eggerthellaceae,Adlercreutzia
+ASV1303,-0.056631552887084345,tie,micro,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,UBA1819
+ASV1263,-0.048451286501865434,brus,micro,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminococcaceae_UCG-004
+ASV155,-0.04113083286631617,brus,micro,Bacteria,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium
+ASV514,-0.01643002423495616,tie,micro,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminococcus_2
+ASV1122,-0.015505859678885443,tie,micro,Bacteria,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminococcaceae_NK4A214_group
+ASV132,-0.009094284069072416,brus,micro,Bacteria,Firmicutes,Clostridia,Clostridiales,Clostridiaceae_1,f_Clostridiaceae_1_ASV132

@@ -1,0 +1,16 @@
+name,comp1,GroupContrib,block,Phylum,Class,Order,Family,Genus
+ASV277,0.507813731,no_veg,micro,Firmicutes,Clostridia,Clostridiales,Peptostreptococcaceae,Paeniclostridium
+ASV241,-0.458826855,combo,micro,Firmicutes,Clostridia,Clostridiales,Peptostreptococcaceae,Intestinibacter
+ASV461,-0.446162583,combo,micro,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Lachnoclostridium
+ASV256,-0.305327995,combo,micro,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Anaerostipes
+ASV415,0.265029481,no_veg,micro,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Roseburia
+ASV1584,-0.253269919,combo,micro,Actinobacteria,Coriobacteriia,Coriobacteriales,Eggerthellaceae,Adlercreutzia
+ASV2,0.177989692,no_veg,micro,Firmicutes,Clostridia,Clostridiales,Clostridiaceae_1,f_Clostridiaceae_1_ASV2
+ASV148,-0.160346263,combo,micro,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Subdoligranulum
+ASV155,-0.147349377,brus,micro,Actinobacteria,Actinobacteria,Bifidobacteriales,Bifidobacteriaceae,Bifidobacterium
+ASV462,0.101552447,no_veg,micro,Firmicutes,Clostridia,Clostridiales,Clostridiaceae_1,f_Clostridiaceae_1_ASV462
+ASV514,-0.088718208,tie,micro,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminococcus_2
+ASV151,-0.06288253,combo,micro,Firmicutes,Clostridia,Clostridiales,Lachnospiraceae,Blautia
+ASV892,-0.060129106,tie,micro,Firmicutes,Clostridia,Clostridiales,Ruminococcaceae,Ruminococcus_1
+ASV556,0.007993931,tie,micro,Firmicutes,Clostridia,Clostridiales,Clostridiaceae_1,f_Clostridiaceae_1_ASV556
+ASV683,0.003175113,tie,micro,Firmicutes,Clostridia,Clostridiales,Clostridiaceae_1,f_Clostridiaceae_1_ASV683
