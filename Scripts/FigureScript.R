@@ -8,7 +8,9 @@ library(tidyverse)
 library(magrittr)
 library(cowplot)
 library(here)
-here::i_am('./FigureScript.R')
+library(ggrepel)
+library(pheatmap)
+here::i_am('./Scripts/FigureScript.R')
 
 #Set the palette for the figures
 pal <- RColorBrewer::brewer.pal(4, 'Dark2')
@@ -225,6 +227,7 @@ mb <- plot_ordination(ps_final, ordBCall, color = 'treatment') +
 #Load the GLM output from the analysis
 load(here('Data/Plot_Data/GLMOutput.RData'))
 
+
 glmplot <- glmres %>%
   #Filter to only ASVs which are significant for at least 1 comparison
   filter(OTU %in% unique(glmnbout$OTU)) %>%
@@ -238,12 +241,19 @@ glmplot <- glmres %>%
                        ifelse(test == 'NVvBrus', 'NC vs Brus',
                               ifelse(test == 'NVvCombo', 'NC vs Combo', 
                                      ifelse(test == 'BrocvCombo', 'Broc vs Combo',
-                                            ifelse(test == 'BrusvCombo', 'Brus vs Combo', 'Broc vs Brus'))))))
+                                            ifelse(test == 'BrusvCombo', 'Brus vs Combo', 'Broc vs Brus')))))) %>%
+  left_join(., as.data.frame(tax_table(ps)) %>% rownames_to_column('OTU')) 
 #Relevel factors plotting
+otuorder <- glmplot %>%
+  arrange(OTU) %>%
+  pull(Genus) %>%
+  unique()
+
 glmplot$sp %<>% factor(levels = c('Sig', 'NSP', 'NSN'))
 glmplot$fc %<>% factor(levels = c('Positive', 'Negative'))
+glmplot$Genus %<>% factor(levels = otuorder)
 
-gplot <- ggplot(glmplot, aes(y = test, x = OTU, fill = fc)) +
+gplot <- ggplot(glmplot, aes(y = test, x = Genus, fill = fc)) +
   #Add tiles
   geom_tile(color = 'black', position = position_nudge(x = -0.5, y = -0.5), size = 2) +
   #Move the points so theyre in the center of the block
@@ -263,8 +273,8 @@ gplot <- ggplot(glmplot, aes(y = test, x = OTU, fill = fc)) +
   #Add labels
   ylab('Comparison') +
   xlab('ASV') +
-  theme(axis.text.x = element_text(size = 25),
-        axis.text.y = element_text(size = 25),
+  theme(axis.text.x = element_text(size = 28),
+        axis.text.y = element_text(size = 28),
         legend.text = element_text(size = 30),
         legend.title = element_text(size = 28),
         axis.title.x = element_text(size = 30), 
@@ -281,26 +291,26 @@ dplot <- glmplot %>%
                                             ifelse(test == 'BrusvCombo', 'Brus vs Combo', 'Broc vs Brus'))))))
 
 #Make the dummy plot
-fcs <- ggplot(dplot, aes(y = test, x = OTU)) +
+fcs <- ggplot(dplot, aes(y = test, x = Genus)) +
   geom_point(position = position_nudge(x = -0.5, y = -0.5), size = 4, aes(color = sp)) +
   scale_fill_manual(values = c('darkorchid', 'goldenrod3', 'grey74')) +
   scale_color_manual(values = c('black', 'darkorchid', 'goldenrod'),
                      labels = c('Significant (q ≤ 0.05)'))   +
   labs(color = 'Significance')  +
-  theme(axis.text.x = element_text(size = 25),
-        axis.text.y = element_text(size = 25),
+  theme(axis.text.x = element_text(size = 28),
+        axis.text.y = element_text(size = 28),
         legend.text = element_text(size = 30),
         legend.title = element_text(size = 34),
         axis.title.x = element_text(size = 30), 
         axis.title.y = element_text(size = 30))
 
 #Make a plot showing just LFC
-fcp <- ggplot(glmplot, aes(y = test, x = OTU, fill = fc)) +
+fcp <- ggplot(glmplot, aes(y = test, x = Genus, fill = fc)) +
   geom_tile() +
   scale_fill_manual(values = c('darkorchid', 'goldenrod', 'grey74')) +
   labs(fill = 'Fold Change') +
-  theme(axis.text.x = element_text(size = 25),
-        axis.text.y = element_text(size = 25),
+  theme(axis.text.x = element_text(size = 28),
+        axis.text.y = element_text(size = 28),
         legend.text = element_text(size = 30),
         legend.title = element_text(size = 34),
         axis.title.x = element_text(size = 30), 
@@ -517,7 +527,7 @@ fig3ae <- plot_grid(subericPlot, sinapicPlot, kaempPlot, dcpPlot, IAAPlot, nrow 
           rel_widths = rep(1, 5), label_size = 20)
 
 #Run the edited ChemRichFunction to return the appropriate data
-source(here('./EditedChemRICH.R'))
+source(here('./Scripts/EditedChemRICH.R'))
 CRData <- run_chemrich_basic(inputfile = here('Data/Plot_Data/NCvCombo_CR_nopep.xlsx') )
 #Remove the categories we don't care about
 CRPlot <- CRData %>%
@@ -766,7 +776,7 @@ hlPlot <- ggplot(hpd_lachData, aes(x = ASV256, y = intensity, color = treatment)
         plot.title = element_text(hjust = 0.5)) +
   scale_y_continuous(limits = c(0, max(hpd_lachData$intensity)+25), expand = c(0,0), name = 'Intensity') +
   scale_x_continuous(expand = c(0,0), limits = c(min(hpd_lachData$ASV256)-1, max(hpd_lachData$ASV256+1)),
-                     name = 'CLR-Transfromed Abundance') +
+                     name = 'CLR-Transformed Abundance') +
   theme(axis.text.x = element_text(size = 27),
         axis.text.y = element_text(size = 25),
         axis.title.y = element_text(size = 27),
@@ -792,7 +802,7 @@ mlPlot <- ggplot(myr_lachData, aes(x = ASV151, y = intensity, color = treatment)
         plot.title = element_text(hjust = 0.5)) +
   scale_y_continuous(limits = c(-1, max(myr_lachData$intensity)+2), expand = c(0,0), name = 'Intensity') +
   scale_x_continuous(expand = c(0,0), limits = c(min(myr_lachData$ASV151)-1, max(myr_lachData$ASV151+1)),
-                     name = 'CLR-Transfromed Abundance') +
+                     name = 'CLR-Transformed Abundance') +
   theme(axis.text.x = element_text(size = 27),
         axis.text.y = element_text(size = 25),
         axis.title.y = element_text(size = 27),
@@ -945,9 +955,11 @@ hmData <- corData %>%
 
 #Make the heatmap
 hmap2 <- pheatmap(hmData, cellwidth = 21, cellheight = 21, fontsize = 20, fontsize_row = 20, fontsize_col = 20)
+hmap2
 
 #Put it all together
 plot_grid(fig5dots, hmap2$gtable, ncol = 1, rel_heights = c(1,2), labels = c('', 'E'), label_size = 23)
+fig5dots
 
 
 # Supplemental Figures ----------------------------------------------------
@@ -1053,7 +1065,7 @@ plot_grid(pcpPlot, pcnPlot, nrow = 1, labels = c('A', 'B'))
 library(pROC)
 
 #Run leave one out cross validation:
-dtestloo <- perf(diablo, validation = 'loo', auc = TRUE, progressBar = FALSE)
+dtestloo <- mixOmics::perf(diablo, validation = 'loo', auc = TRUE, progressBar = FALSE)
 
 #Extract out the data to make the ROC curves
 metab1 <- as.data.frame(dtestloo$predict$nrep1$metab$comp1)
@@ -1214,7 +1226,6 @@ corcirc <- ggplot(dcir2, aes(x, y, color = gc, shape = Block)) +
 
 #Put it all together into one plot.
 plot_grid(allroc, corcirc, labels = c('A', 'B'), ncol = 2)
-
 
 
 
