@@ -1,5 +1,5 @@
 # Bouranis_2022_Brassicas_Microbe_Metabolomics
-Analysis for the Bouranis et al Ex Vivo Fecal Incubation Study
+Analysis for the Bouranis et al paper in Nutrients: https://www.mdpi.com/2072-6643/15/1/42
 
 The bulk of the analysis can be found in `Analysis.Rmd`
 
